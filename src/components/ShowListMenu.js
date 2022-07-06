@@ -41,7 +41,7 @@ function ShowListMenu() {
       <Box m={4}></Box>
       <Stack direction="row">
         <Button onClick={() => left()} color="error">
-          -
+          <Typography variant="h4">-</Typography>
         </Button>
         <Container>
           <Stack direction="row" spacing={2}>
@@ -60,7 +60,7 @@ function ShowListMenu() {
           </Stack>
         </Container>
         <Button onClick={() => right()} color="error">
-          +
+          <Typography variant="h4">+</Typography>
         </Button>
       </Stack>
       <Cart />

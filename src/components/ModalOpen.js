@@ -44,10 +44,10 @@ function ModalOpen({ openModal, setOpenModal, clickToPay, subtotal }) {
           <Table sx={{ minWidth: 200 }} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell align="right">Quantity</TableCell>
-                <TableCell>Name</TableCell>
-                <TableCell align="right">Price</TableCell>
-                <TableCell align="right">Total</TableCell>
+                <TableCell align="center">Quantity</TableCell>
+                <TableCell align="center">Name</TableCell>
+                <TableCell align="center">Price</TableCell>
+                <TableCell align="center">SubTotal</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -55,22 +55,22 @@ function ModalOpen({ openModal, setOpenModal, clickToPay, subtotal }) {
                 if (food.ordered > 0) {
                   return (
                     <TableRow key={food.id} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
-                      <TableCell align="right">{food.ordered} x </TableCell>
-                      <TableCell component="th" scope="row">
+                      <TableCell align="center">{food.ordered} x </TableCell>
+                      <TableCell align="center" component="th" scope="row">
                         {food.name}
                       </TableCell>
-                      <TableCell align="right">{food.price}€</TableCell>
-                      <TableCell align="right">{food.ordered * food.price}€</TableCell>
+                      <TableCell align="center">{food.price}€</TableCell>
+                      <TableCell align="center">{food.ordered * food.price}€</TableCell>
                     </TableRow>
                   );
                 } else return "";
               })}
 
               <TableRow>
-                <TableCell>Total to pay</TableCell>
+                <TableCell align="center">Total</TableCell>
                 <TableCell align="right"></TableCell>
                 <TableCell align="right"></TableCell>
-                <TableCell align="right">{subtotal()}€</TableCell>
+                <TableCell align="center">{subtotal()}€</TableCell>
               </TableRow>
             </TableBody>
           </Table>
