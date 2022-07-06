@@ -19,7 +19,7 @@ function ShowListMenu() {
       </AppBar>
       <Box m={4}></Box>
       <Container>
-        <Stack direction="row" spacing={2}>
+        <Stack direction="row" sx={{ flexWrap: "wrap" }}>
           {menuList.map((food) => {
             return (
               <FoodCard

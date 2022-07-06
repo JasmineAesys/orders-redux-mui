@@ -12,16 +12,23 @@ export const counterSlice = createSlice({
         return;
       }
       state[action.payload[0]].quantity -= action.payload[1];
+      state[action.payload[0]].ordered += action.payload[1];
     },
     removeFromOrder: (state, action) => {
       if (state[action.payload[0]].quantity + action.payload[1] > initialState[action.payload[0]].quantity) {
         return;
       }
       state[action.payload[0]].quantity += action.payload[1];
+      state[action.payload[0]].ordered -= action.payload[1];
+    },
+    resetCart: (state, action) => {
+      state = state.map((food) => {
+        return (food.ordered = 0);
+      });
     },
   },
 });
 
-export const { order, removeFromOrder } = counterSlice.actions;
+export const { order, removeFromOrder, resetCart } = counterSlice.actions;
 
 export default counterSlice.reducer;
