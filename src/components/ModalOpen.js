@@ -26,9 +26,13 @@ const style = {
   p: 4,
 };
 
-function ModalOpen({ openModal, setOpenModal, clickToPay, subtotal }) {
+function ModalOpen({ openModal, setOpenModal, clickToPay, subtotal, setBadge }) {
   const menuList = useSelector((state) => state.orders);
 
+  const handlePay = () => {
+    clickToPay();
+    setBadge(0);
+  };
   return (
     <Modal
       open={openModal}
@@ -76,7 +80,7 @@ function ModalOpen({ openModal, setOpenModal, clickToPay, subtotal }) {
           </Table>
         </TableContainer>
         <Box m={2} display="flex" justifyContent="flex-end" alignItems="flex-end">
-          <Button variant="contained" color={"success"} endIcon={<SendIcon />} onClick={() => clickToPay()}>
+          <Button variant="contained" color={"success"} endIcon={<SendIcon />} onClick={() => handlePay()}>
             Pay
           </Button>
         </Box>

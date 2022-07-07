@@ -17,10 +17,8 @@ function Login() {
     if (usernameFound[0].pass === pass) {
       setLogged(true);
       localStorage.setItem("logged", true);
-    }
-    if (logged) {
       navigate("/");
-    }
+    } else setLogged(false);
   }
 
   return (
@@ -30,7 +28,40 @@ function Login() {
           Login to order
         </Typography>
       </AppBar>
-      <Container>
+      {!localStorage.getItem("logged") && (
+        <Container>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              marginTop: "150px",
+            }}
+          >
+            <TextField
+              required
+              id="outlined-required"
+              label="Email"
+              sx={{ marginBottom: "15px" }}
+              onChange={(e) => setUser(e.target.value)}
+            />
+            <TextField
+              required
+              id="outlined-password-input"
+              label="Password"
+              type="password"
+              autoComplete="current-password"
+              onChange={(e) => setPass(e.target.value)}
+              sx={{ marginBottom: "15px" }}
+            />
+
+            <Button variant="contained" color="error" onClick={() => checkUser()}>
+              Login
+            </Button>
+          </Box>
+        </Container>
+      )}
+      {localStorage.getItem("logged") && (
         <Box
           sx={{
             display: "flex",
@@ -39,28 +70,14 @@ function Login() {
             marginTop: "150px",
           }}
         >
-          <TextField
-            required
-            id="outlined-required"
-            label="Email"
-            sx={{ marginBottom: "15px" }}
-            onChange={(e) => setUser(e.target.value)}
-          />
-          <TextField
-            required
-            id="outlined-password-input"
-            label="Password"
-            type="password"
-            autoComplete="current-password"
-            onChange={(e) => setPass(e.target.value)}
-            sx={{ marginBottom: "15px" }}
-          />
-
-          <Button variant="contained" color="error" onClick={() => checkUser()}>
-            Login
+          <Typography variant="h4" component="div" m={2}>
+            Already logged in
+          </Typography>
+          <Button variant="contained" color="error" onClick={() => navigate(-1)}>
+            Back
           </Button>
         </Box>
-      </Container>
+      )}
     </>
   );
 }

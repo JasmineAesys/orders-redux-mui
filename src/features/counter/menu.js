@@ -58,7 +58,7 @@ export const menu = [
   {
     id: 7,
     name: "Macarons",
-    quantity: 10,
+    quantity: 30,
     price: 2,
     ordered: 0,
     image: "/images/macarons.jpg",

@@ -12,9 +12,19 @@ import { order, removeFromOrder } from "../features/counter/counterSlice";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 
-function FoodCard({ idArray, quantity, name, image, price }) {
+function FoodCard({ idArray, quantity, name, image, price, itemInCart }) {
   const [increment, setIncrement] = useState(1);
   const dispatch = useDispatch();
+
+  function add() {
+    dispatch(removeFromOrder([idArray, increment]));
+    itemInCart();
+  }
+
+  function remove() {
+    dispatch(order([idArray, increment]));
+    itemInCart();
+  }
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardActionArea>
@@ -24,7 +34,7 @@ function FoodCard({ idArray, quantity, name, image, price }) {
             {name}
           </Typography>
           <Typography variant="body2" color="text.secondary" mt={3}>
-            We have {quantity} remaining left
+            We have {quantity * 1} remaining left
           </Typography>
           <Typography variant="h6" align="right">
             {price} €
@@ -32,7 +42,7 @@ function FoodCard({ idArray, quantity, name, image, price }) {
         </CardContent>
       </CardActionArea>
       <Stack direction="row" spacing={1} m={1}>
-        <Button variant="outlined" color="error" onClick={() => dispatch(removeFromOrder([idArray, increment]))}>
+        <Button variant="outlined" color="error" onClick={() => add()}>
           <RemoveCircleOutlineIcon />
         </Button>
         <TextField
@@ -40,10 +50,10 @@ function FoodCard({ idArray, quantity, name, image, price }) {
           id="quantity"
           label="Quantity"
           variant="outlined"
-          defaultValue={1}
-          onChange={(e) => setIncrement(e.target.value)}
+          value={increment}
+          onChange={(e) => setIncrement(e.target.value * 1)}
         />
-        <Button variant="outlined" color="error" onClick={() => dispatch(order([idArray, increment]))}>
+        <Button variant="outlined" color="error" onClick={() => remove()}>
           <AddCircleOutlineIcon />
         </Button>
       </Stack>
